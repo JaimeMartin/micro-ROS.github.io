@@ -4,7 +4,7 @@ These instructions start from a **ROS 2 Dashing** installation and ends with an 
 
 ## Demo Crazyflie 2.1 + FreeRTOS
 
-Create a micro-ROS workspace, clone the **micro-ROS build system** package inside `src` folder and build it: 
+The first step is creating a micro-ROS workspace. To do so, clone the **micro-ROS build system** package inside `src` folder and build it: 
 
 ```bash
 # Source ROS 2 Dashing 

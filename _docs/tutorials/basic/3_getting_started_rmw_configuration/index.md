@@ -1,4 +1,3 @@
-
 Since micro-ROS is intended to work on extreme low resources systems its middleware layer is highly configurable. This configurability along with the fact that the middleware layer does not use dynamic memory allows the users to determine how much static memory is going to be allocated.
 
 If you want to read more about the middleware layer follow this link: [Micro-XRCE-DDS](https://micro-xrce-dds.readthedocs.io/en/latest/)

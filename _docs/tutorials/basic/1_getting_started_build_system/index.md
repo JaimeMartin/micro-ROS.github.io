@@ -6,11 +6,11 @@ Detailed information about this build system and supported platforms can be foun
 
 ## Simple publisher and subscriber
 
-First of all, a simple example of an *int32* publisher and subscriber is going to be implemented. As is exposed in the build system documentation, the starting point for this tutorial is a **ROS 2 Dashing** installation.
+A simple example of an *int32* publisher and subscriber is going to be implemented along this tutorial. As is exposed in the build system documentation, the starting point for this tutorial is a **ROS 2 Dashing** installation.
 
 This micro-ROS example will use your local computer (aka host) as platform. This way, both nodes and agent will run in your host. Detailed information about micro-ROS architecture can be found [here](https://micro-ros.github.io/docs/overview/).
 
-Create a micro-ROS workspace, clone the **micro-ROS build system** package inside `src` folder and build it:
+Let's start creating a micro-ROS workspace. Clone the **micro-ROS build system** package inside `src` folder and build it:
 
 ```bash
 # Source ROS 2 Dashing 
@@ -39,7 +39,7 @@ ros2 run micro_ros_setup create_agent_ws.sh
 colcon build
 ```
 
-Then, let's create a environment where build some host demo micro-ROS applications.  Download, configure and build some demo apps:
+Then, let's create a environment where build some host demo micro-ROS applications. Download, configure and build some demo apps:
 
 ```bash
 # Download micro-ROS host demo packages
@@ -52,7 +52,7 @@ ros2 run micro_ros_setup configure_firmware.sh
 ros2 run micro_ros_setup build_firmware.sh
 ```
 
-Now every required micro-ROS package is built, so it is possible to run the demos. You will need three different command lines in order to run elements separately:
+Now all required micro-ROS packages are built, so it is possible to run the demos. You will need three different command lines in order to run elements separately:
 
 ```bash
 # REMEMBER: Source workspaces on all command lines
@@ -73,7 +73,7 @@ You should see how the publisher and the subscriber register all their entities 
 
 ### Code analysis
 
-The demos' source is located in `uros_ws/src/uros/micro-ROS-demos/rcl/int32_publisher` and `uros_ws/src/uros/micro-ROS-demos/rcl/int32_subscriber` respectively. 
+The demos' source code is located in `uros_ws/src/uros/micro-ROS-demos/rcl/int32_publisher` and `uros_ws/src/uros/micro-ROS-demos/rcl/int32_subscriber` respectively. 
 
 A brief explanation about how this micro-ROS nodes are implemented using RCL API is presented. Further information about this ROS 2 Client Library can be found [here](http://docs.ros2.org/dashing/developer_overview.html#the-rcl-repository).
 
@@ -109,6 +109,7 @@ rcl_subscription_options_t subscription_ops = rcl_subscription_get_default_optio
 rcl_subscription_t subscription = rcl_get_zero_initialized_subscription();
 rcl_subscription_init(&subscription, &node, ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32), "std_msgs_msg_Int32", &subscription_ops);
 ```
+
 At this point, is possible to publish a message on a topic as seen in `int32_publisher` demo code:
 
 ```c
@@ -139,7 +140,7 @@ rcl_wait_set_add_subscription(&wait_set, &subscription, NULL);
 rcl_wait(&wait_set, RCL_MS_TO_NS(1000));
 ```
 
-Once the wait has ended, it is possible to check the wait set subscription status.
+Once the wait has ended, it is possible to check the wait set subscription status and retrieve subscription data if it is ready.
 
 ```c
 if(wait_set.subscriptions[0] != NULL){ // If not NULL the subscription has data
