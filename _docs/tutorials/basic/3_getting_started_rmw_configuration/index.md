@@ -33,8 +33,7 @@ The following parameters can be configured through CMake arguments:
 | RMW_UXRCE_DEFAULT_UDP_IP | Sets the agent default IP address. | 127.0.0.1 |
 | RMW_UXRCE_DEFAULT_UDP_PORT | Sets the agent default IP port. | 8888 |
 
-  
-The micro-ROS way to pass CMake arguments to the buils system is using 'colcon.meta' file. For example, increasing the number of statically allocated publishers looks like that:
+The micro-ROS way to pass CMake arguments to the buils system is using `colcon.meta` file. For example, increasing the number of statically allocated publishers looks like that:
 
 ```
 { "names": {
