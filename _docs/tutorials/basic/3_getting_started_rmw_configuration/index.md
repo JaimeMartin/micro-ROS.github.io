@@ -12,28 +12,33 @@ Ready to use code related to this tutorial can be found in `micro-ROS-demos/rcl/
 
 The following parameters can be configured through CMake arguments:
 
-- **CONFIG_MICRO_XRCEDDS_TRANSPORT**: Sets Micro XRCE-DDS transport to use. (udp | serial | custom). Default: udp
-- **CONFIG_MICRO_XRCEDDS_CREATION_MODE**: Sets creation mode in Micro XRCE-DDS. (xml | refs). Default: xml
-- **CONFIG_MAX_HISTORY**: This value sets the number of MTUs to buffer. Micro XRCE-DDS client configuration provides their size. Default: 4
-- **CONFIG_MAX_NODES**: This value sets the maximum number of nodes. Default: 4
-- **CONFIG_MAX_PUBLISHERS_X_NODE**: This value sets the maximum number of publishers for a node. Default: 4
-- **CONFIG_MAX_SUBSCRIPTIONS_X_NODE**: This value sets the maximum number of subscriptions for a node. Default: 4
-- **CONFIG_MAX_SERVICES_X_NODE**: This value sets the maximum number of services for a node. Default: 4
-- **CONFIG_MAX_CLIENTS_X_NODE**: This value sets the maximum number of clients for a node. Default: 4
-- **CONFIG_RMW_NODE_NAME_MAX_NAME_LENGTH**: This value sets the maximum number of characters for a node name. Default: 128
-- **CONFIG_RMW_TOPIC_NAME_MAX_NAME_LENGTH**: This value sets the maximum number of characters for a topic name. Default: 100
-- **CONFIG_RMW_TYPE_NAME_MAX_NAME_LENGTH**: This value sets the maximum number of characters for a type name. Default: 128
-- **CONFIG_RMW_XML_BUFFER_LENGTH**: This value sets the maximum number of characters for a XML buffer. Default: 600
-- **CONFIG_RMW_REF_BUFFER_LENGTH**: This value sets the maximum number of characters for a reference buffer. Default: 100
-- **CONFIG_RMW_DEFAULT_SERIAL_DEVICE**: Sets the agent serial port. Default: /dev/ttyAMA0
-- **CONFIG_RMW_DEFAULT_UDP_IP**: Sets the agent IP address. Default: 127.0.0.1
-- **CONFIG_RMW_DEFAULT_UDP_PORT**: Sets the agent IP port. Default: 8888
+<!-- TODO: Related errors (FAQ) -->
+
+| Parameter name | Description |  Default value |
+| - | - | - |
+| RMW_UXRCE_TRANSPORT | Sets Micro XRCE-DDS transport to use: udp, serial or custom. | udp |
+| RMW_UXRCE_CREATION_MODE | Sets creation mode in Micro XRCE-DDS: xml or refs. | xml |
+| RMW_UXRCE_MAX_HISTORY | This value sets the number of MTUs to buffer. Micro XRCE-DDS client configuration provides their size. | 4 |
+| RMW_UXRCE_MAX_NODES | This value sets the maximum number of nodes. | 4 |
+| RMW_UXRCE_MAX_PUBLISHERS_X_NODE | This value sets the maximum number of publishers for a node. | 4 |
+| RMW_UXRCE_MAX_SUBSCRIPTIONS_X_NODE | This value sets the maximum number of subscriptions for a node. | 4 |
+| RMW_UXRCE_MAX_SERVICES_X_NODE | This value sets the maximum number of services for a node. | 4 |
+| RMW_UXRCE_MAX_CLIENTS_X_NODE | This value sets the maximum number of clients for a node. | 4 |
+| RMW_UXRCE_NODE_NAME_MAX_LENGTH | This value sets the maximum number of characters for a node name. | 128 |
+| RMW_UXRCE_TOPIC_NAME_MAX_LENGTH | This value sets the maximum number of characters for a topic name. | 100 |
+| RMW_UXRCE_TYPE_NAME_MAX_LENGTH | This value sets the maximum number of characters for a type name. | 128 |
+| RMW_UXRCE_XML_BUFFER_LENGTH | This value sets the maximum number of characters for a XML buffer used internally. | 600 |
+| RMW_UXRCE_REF_BUFFER_LENGTH | This value sets the maximum number of characters for a reference buffer used internally. | 100 |
+| RMW_UXRCE_DEFAULT_SERIAL_DEVICE | Sets the agent default serial port. | /dev/ttyAMA0 |
+| RMW_UXRCE_DEFAULT_UDP_IP | Sets the agent default IP address. | 127.0.0.1 |
+| RMW_UXRCE_DEFAULT_UDP_PORT | Sets the agent default IP port. | 8888 |
+
   
 The micro-ROS way to pass CMake arguments to the buils system is using 'colcon.meta' file. For example, increasing the number of statically allocated publishers looks like that:
 
 ```
 { "names": {
-  "rmw_microxrcedds": { "cmake-args": [ "-DCONFIG_MAX_PUBLISHERS_X_NODE=6" ] }
+  "rmw_microxrcedds": { "cmake-args": [ "-DRMW_UXRCE_MAX_PUBLISHERS_X_NODE=6" ] }
   }
 }
 ```
@@ -68,5 +73,5 @@ rcl_init(0, NULL, &init_options, &context);
 // ... micro-ROS code ...
 ```
 
-Notice that is also possible to set the Micro-XRCE-DDS client key, which would otherwise be set randomly. This feature is useful for reusing DDS entities already created on the agent side.
+Notice that is also possible to set the Micro-XRCE-DDS client key, which would otherwise be set randomly. This feature is useful for reusing DDS entities already created on the agent side. Further information can be found [here](https://micro-xrce-dds.readthedocs.io/en/latest/deployment.html#configurate-the-publisher).
 
